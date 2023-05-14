@@ -63,7 +63,6 @@ public class DZ3 {
                         list.add(new ArrayList<String>());
                         list.get(listSize).add(temp);
                     }
-
                 }
             } else if (number == 2) {
                 System.out.println("Введите наименование жанра: ");
