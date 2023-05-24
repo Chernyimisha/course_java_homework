@@ -5,7 +5,7 @@ import java.util.*;
 
 public class DZ3 {
     public static void main(String[] args) {
-        task1();
+        //task1();
         task2();
     }
 

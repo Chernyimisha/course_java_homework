@@ -17,7 +17,7 @@ public class MainClassFromLessonFour {
 
     }
 
-    private static void ex0() {
+    static void ex0() {
         final int SIZE = 100_000_000;
         Random random = new Random();
 
