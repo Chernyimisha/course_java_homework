@@ -10,12 +10,8 @@ public class MainClassFromLessonFour {
         List list = List.of(new String(), new ArrayList<>(), new boolean[]{}, 1);
         System.out.println(list);
         ex0();
-        ex1();
     }
 
-    private static void ex1() {
-
-    }
 
     static void ex0() {
         final int SIZE = 100_000_000;
