@@ -1,14 +1,77 @@
 package lesson4_5_6;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class MainClassFromLessonFive {
     public static void main(String[] args) {
-        //ex0();
-        ex1();
-        System.out.println();
-        System.out.print(ex2(259));
+        ex0();
+        //ex1();
+        //System.out.println();
+        //System.out.print(ex2(259));
+        ex2();
 
+    }
+
+    private static void ex2() {
+        //  2. Написать программу, которая найдёт и выведет повторяющиеся имена с количеством повторений. Отсортировать по убыванию популярности.
+        List<String> namesList = List.of(
+                "Иван", "Светлана", "Кристина", "Анна", "Анна", "Иван", "Петр", "Павел", "Петр", "Мария",
+                "Марина", "Мария", "Мария", "Марина", "Анна", "Иван", "Петр", "Иван", "Анна", "Иван", "Петр", "Павел"
+        );
+        Map<String, Integer> namesMap= new HashMap<>();
+        countNamesInMap(namesList, namesMap);
+        System.out.println(namesMap);
+        sortedPrintMap(namesMap);
+
+        //ПРИМЕР СОРТИРОВКИ МАПА ПО ЗНАЧЕНИЯМ ПО ВОЗРАСТАНИЮ И ПО УБЫВАНИЮ ДЛЯ Integer
+
+//        Map<String, Integer> sortedMap = namesMap.entrySet().stream()
+//                .sorted(Comparator.comparingInt(e -> e.getValue()))
+//                .collect(Collectors.toMap(
+//                        Map.Entry::getKey,
+//                        Map.Entry::getValue,
+//                        (a, b) -> { throw new AssertionError(); },
+//                        LinkedHashMap::new
+//                ));
+//        Map<String, Integer> sortedMap = namesMap.entrySet().stream()
+//                .sorted(Comparator.comparingInt(e -> -e.getValue()))
+//                .collect(Collectors.toMap(
+//                        Map.Entry::getKey,
+//                        Map.Entry::getValue,
+//                        (a, b) -> { throw new AssertionError(); },
+//                        LinkedHashMap::new
+//                ));
+//
+//        sortedMap.entrySet().forEach(System.out::println);
+    }
+
+    private static void sortedPrintMap(Map<String, Integer> map) {
+        Map<String, Integer> sortedMap = map.entrySet().stream()
+                .sorted(Comparator.comparingInt(e -> -e.getValue()))
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue,
+                        (a, b) -> { throw new AssertionError(); },
+                        LinkedHashMap::new
+                ));
+        for (String key : sortedMap.keySet()) {
+            System.out.printf("%s\t->\t%s%n", key, sortedMap.get(key));
+        }
+    }
+
+
+    private static void countNamesInMap(List<String> list, Map<String, Integer> map) {
+        int count = 1;
+        for (String item: list){
+            if (!map.containsKey(item)){
+                map.put(item, count);
+            } else{
+                count = map.get(item);
+                map.put(item, count+1);
+                count = 1;
+            }
+        }
     }
 
     private static String ex2(int number) {
