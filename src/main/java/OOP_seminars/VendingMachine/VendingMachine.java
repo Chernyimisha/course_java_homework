@@ -7,10 +7,13 @@ public class VendingMachine {
     private List<Product> vending = new ArrayList<>();
     private double cash = 0;
 
+
     public VendingMachine addProduct(Product prod){
         vending.add(prod);
         return this;
     }
+
+
 
     public List<Product> getVending() {
         return vending;
