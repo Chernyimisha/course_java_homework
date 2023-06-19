@@ -1,15 +1,14 @@
 package OOP_seminars.seminar_4.shilds;
 
-public class Hoplon extends Shield{
+public class Hoplon implements Shielded {
 
-    public Hoplon(int size, int armorReserve) {
-        super(size, armorReserve);
+    @Override
+    public int armorReserve() {
+        return 50;
     }
 
     @Override
     public String toString() {
-        return "Hoplon{" +
-                "armorReserve=" + armorReserve +
-                '}';
+        return "Hoplon";
     }
 }

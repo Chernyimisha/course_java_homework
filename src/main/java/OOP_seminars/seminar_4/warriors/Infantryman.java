@@ -1,12 +1,12 @@
 package OOP_seminars.seminar_4.warriors;
 
-import OOP_seminars.seminar_4.shilds.Buckler;
+import OOP_seminars.seminar_4.shilds.Hoplon;
+import OOP_seminars.seminar_4.shilds.Shielded;
 import OOP_seminars.seminar_4.weapons.meleeWeapon.Melee;
 
-public class Infantryman extends Warrior<Melee>{
-
-    public Infantryman(String name, int healthPoint, Melee weapon, Buckler buckler) {
-        super(name, healthPoint, weapon, buckler);
+public class Infantryman extends Warrior<Melee, Shielded> {
+    public Infantryman(String name, Melee weapon, Shielded shield, int healthPoint) {
+        super(name, weapon, shield, healthPoint);
     }
 
     @Override

@@ -1,39 +1,43 @@
 package OOP_seminars.seminar_4.warriors;
 
-import OOP_seminars.seminar_4.shilds.Buckler;
+
+import OOP_seminars.seminar_4.shilds.Shielded;
 import OOP_seminars.seminar_4.weapons.Weapon;
 
 import java.util.Random;
 
-public abstract class Warrior<W extends Weapon> {
-    private final String name;
-    private int healthPoint;
+public abstract class Warrior <W extends Weapon, S extends Shielded>{
+    private String name;
     private W weapon;
+    private S shield;
+    private int healthPoint;
 
-    private Buckler buckler;
 
-    public Warrior(String name, int healthPoint, W weapon, Buckler buckler) {
+
+    public Warrior(String name, W weapon, S shield, int healthPoint) {
         this.name = name;
-        this.healthPoint = healthPoint;
         this.weapon = weapon;
-        this.buckler = buckler;
-    }
-
-    public String getName() {
-        return name;
+        this.shield = shield;
+        this.healthPoint = healthPoint;
     }
 
     public int getHealthPoint() {
         return healthPoint;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public W getWeapon() {
         return weapon;
     }
 
-    public void setHealthPoint(int healthPoint) {
-        this.healthPoint = healthPoint;
+    public S getShield(){
+        return shield;
     }
+
+
 
     public void setWeapon(W weapon) {
         this.weapon = weapon;
@@ -41,8 +45,9 @@ public abstract class Warrior<W extends Weapon> {
 
     public int hit() {
         Random rnd = new Random();
+        int hitDamage = rnd.nextInt(0, weapon.damage() + 1);
 
-        return rnd.nextInt(0, weapon.damage() + 1);
+        return hitDamage;
     }
 
     public void reduceHealth(int damage) {
@@ -54,6 +59,23 @@ public abstract class Warrior<W extends Weapon> {
 
     @Override
     public String toString() {
-        return String.format("Name: %s, Weapon: %s, HealthPoint: %d", name, weapon, healthPoint);
+        return String.format("Name: %s, Weapon: %s, Shield: %s, HealthPoint: %d", name, weapon, shield,healthPoint);
     }
+
+    public int momentArmor(int damage) {
+        int result = 0;
+        int protectionSuccess = 0;
+        Random rnd = new Random();
+        protectionSuccess = rnd.nextInt(0, 100);
+        result = Math.round((float) (damage * protectionSuccess) /100);
+        return result;
+    }
+    public int reduceArmorReserve(int armorReserve, int momentArmor){
+        armorReserve -= momentArmor;
+        if (armorReserve < 0) {
+            armorReserve = 0;
+        }
+        return armorReserve;
+    }
+
 }

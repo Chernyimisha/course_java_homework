@@ -6,59 +6,73 @@ import OOP_seminars.seminar_4.warriors.Warrior;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 
-public class Team<T extends Warrior> implements Iterable<T> {
-    private List<T> team = new ArrayList<>();
+public class Team <T extends Warrior> implements Iterable<T>{
 
-    public void add(T element) {
+
+    List<T> team = new ArrayList<>();
+
+
+    public T getWarrior(int index){
+        return team.get(index);
+    }
+
+    public void add(T element){
         team.add(element);
     }
+
 
     @Override
     public Iterator<T> iterator() {
         return team.iterator();
     }
 
-    public int getTeamHealth() {
-        int teamHealth = 0;
-        for (T t : this) {
-            teamHealth += t.getHealthPoint();
+    public int getTeamHealth(){
+        int result = 0;
+        for (T warrior: this) {
+            result += warrior.getHealthPoint();
         }
-        return teamHealth;
+        return result;
     }
 
-    public int maxAttackDistance() {
-        int maxDistance = 0;
-        for (T t : this) {
-            if (!(t instanceof Archer)) {
-                continue;
-            }
-            int currentDistance = ((Archer) t).distance();
-            if (maxDistance < currentDistance) {
-                maxDistance = currentDistance;
-            }
+    public int getTeamArmorReserve(){
+        int result = 0;
+        for (T warrior: this) {
+            result += warrior.getShield().armorReserve();
         }
-        return maxDistance;
+        return result;
+    }
+    public int getTeamDamage(){
+        int result = 0;
+        for (T warrior: this) {
+            result += warrior.getWeapon().damage();
+        }
+        return result;
     }
 
-    public int getTeamAttack() {
-        int teamAttack = 0;
-        for (T t : this) {
-            teamAttack += t.getWeapon().damage();
-        }
-        return teamAttack;
+    public int maxAttackDistance(){
+        int result;
+        int tempResult;
+        result = tempResult = 0;
+
+        for (T warrior: this) {
+            if(warrior instanceof Archer){
+                tempResult = ((Archer) warrior).distance();
+                if(tempResult > result) result = tempResult;
+            }
+        } return result;
     }
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        for (T t : this) {
-            builder.append(t).append('\n');
+        StringBuilder sb = new StringBuilder();
+        for (T warrior: this) {
+            sb.append(warrior).append(",\n");
         }
-        builder.append(String.format("TeamAttack: %d ", getTeamAttack()));
-        builder.append(String.format("TeamHealth: %d ", getTeamHealth()));
-        builder.append(String.format("TeamRange: %d ", maxAttackDistance()));
-        return builder.toString();
+        sb.append(String.format("\nMaxTeamAttack: %d\n", getTeamDamage()));
+        sb.append(String.format("MaxDistanceAttack: %d\n", maxAttackDistance()));
+        sb.append(String.format("TeamHealth: %d\n", getTeamHealth()));
+        sb.append(String.format("TeamArmorReserve: %d\n", getTeamArmorReserve()));
+        return sb.toString();
     }
 }

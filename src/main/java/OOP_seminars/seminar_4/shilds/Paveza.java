@@ -1,14 +1,15 @@
 package OOP_seminars.seminar_4.shilds;
 
-public class NullShield implements Shielded {
+public class Paveza implements Shielded {
+
 
     @Override
     public int armorReserve() {
-        return 0;
+        return 80;
     }
 
     @Override
     public String toString() {
-        return "not shield";
+        return "Paveza";
     }
 }

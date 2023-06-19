@@ -3,7 +3,7 @@ package OOP_seminars.seminar_4.weapons.rangedWeapon;
 public class CrossBow implements Ranged{
     @Override
     public int damage() {
-        return 10;
+        return 15;
     }
 
     @Override
@@ -13,7 +13,6 @@ public class CrossBow implements Ranged{
 
     @Override
     public String toString() {
-        return String.format("CrossBow: %d ", damage());
+        return "CrossBow";
     }
-
 }

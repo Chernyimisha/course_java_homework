@@ -3,7 +3,7 @@ package OOP_seminars.seminar_4.weapons.rangedWeapon;
 public class Bow implements Ranged{
     @Override
     public int damage() {
-        return 8;
+        return 20;
     }
 
     @Override
@@ -13,6 +13,6 @@ public class Bow implements Ranged{
 
     @Override
     public String toString() {
-        return String.format("Bow: %d ", damage());
+        return "Bow";
     }
 }
