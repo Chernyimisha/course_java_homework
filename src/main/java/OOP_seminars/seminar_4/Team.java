@@ -1,5 +1,8 @@
 package OOP_seminars.seminar_4;
 
+import OOP_seminars.seminar_4.shilds.Hoplon;
+import OOP_seminars.seminar_4.shilds.NullShield;
+import OOP_seminars.seminar_4.shilds.Shielded;
 import OOP_seminars.seminar_4.warriors.Archer;
 import OOP_seminars.seminar_4.warriors.Warrior;
 
@@ -34,6 +37,25 @@ public class Team <T extends Warrior> implements Iterable<T>{
         }
         return result;
     }
+
+    public int getMinSizeShield(){
+        int result = 0;
+        int tempResult;
+
+        for (T warrior1: this) {
+            if (!(warrior1.getShield() instanceof NullShield) && result == 0) {
+                result = warrior1.getShield().getSize();
+            }
+
+            for (T warrior2 : this) {
+                if (!(warrior2.getShield() instanceof NullShield)) {
+                    tempResult = warrior2.getShield().getSize();
+                    if (tempResult < result) result = tempResult;
+                }
+            }
+        } return result;
+    }
+
 
     public int getTeamArmorReserve(){
         int result = 0;
@@ -73,6 +95,8 @@ public class Team <T extends Warrior> implements Iterable<T>{
         sb.append(String.format("MaxDistanceAttack: %d\n", maxAttackDistance()));
         sb.append(String.format("TeamHealth: %d\n", getTeamHealth()));
         sb.append(String.format("TeamArmorReserve: %d\n", getTeamArmorReserve()));
+        if (getMinSizeShield()>0) sb.append(String.format("MinSizeShield: %d\n", getMinSizeShield()));
+        else sb.append("MinSizeShield: there are no warriors with shields in the team\n");
         return sb.toString();
     }
 }

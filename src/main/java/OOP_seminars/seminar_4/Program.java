@@ -20,12 +20,12 @@ public class Program {
         Team<Infantryman> tails = new Team<>();
 
         horns.add(new Archer("Robin", new Bow(), new NullShield(),100));
-        horns.add(new Archer("Michail", new CrossBow(), new Paveza(),120));
-        horns.add(new Infantryman("Denis", new Sword(), new Hoplon(),150));
+        horns.add(new Archer("Michail", new CrossBow(), new Paveza(15),120));
+        horns.add(new Infantryman("Denis", new Sword(), new Hoplon(10),150));
 
         hooves.add(new Archer("Alex", new Bow(), new NullShield(),100));
-        hooves.add(new Archer("Michail", new Bow(), new Paveza(),90));
-        hooves.add(new Archer("Denis", new CrossBow(), new Paveza(),150));
+        hooves.add(new Archer("Michail", new Bow(), new Paveza(13),90));
+        hooves.add(new Archer("Denis", new CrossBow(), new Paveza(18),150));
 
         tails.add(new Infantryman("John", new Axe(), new NullShield(),110));
         tails.add(new Infantryman("Piter", new Axe(), new NullShield(),140));
