@@ -1,5 +1,6 @@
 package OOP_seminars.OOP_seminar5_MVC.src.personal.views;
 
+import OOP_seminars.OOP_seminar5_MVC.src.personal.model.NameAndSurnameValidator;
 import OOP_seminars.OOP_seminar5_MVC.src.personal.model.User;
 import OOP_seminars.OOP_seminar5_MVC.src.personal.controllers.UserController;
 
@@ -32,11 +33,32 @@ public class ViewUser {
                     case LIST:
                         readList();
                         break;
+                    case UPDATE:
+                        updateUser();
+                        break;
+                    case DELETE:
+                        deleteUser();
+                        break;
                 }
             } catch (Exception e){
                 System.out.println(e.getMessage());
             }
         }
+    }
+
+    private void deleteUser() throws Exception {
+        readList();
+        User user = getUser();
+        userController.deleteUser(user);
+    }
+
+    private void updateUser() throws Exception {
+        readList();
+        User user = getUser();
+        User updatedUser = getNewUser();
+        updatedUser.setId(user.getId());
+        User savedUser = userController.updateUser(updatedUser);
+        System.out.println(savedUser);
     }
 
     private void readList() {
@@ -47,16 +69,30 @@ public class ViewUser {
     }
 
     private void readUser() throws Exception {
-        String id = prompt("Идентификатор пользователя: ");
-        User user = userController.readUser(id);
+        User user = getUser();
         System.out.println(user);
     }
 
-    private void createUser() {
+    private User getUser() throws Exception {
+        String id = prompt("Идентификатор пользователя: ");
+        User user = userController.readUser(id);
+        return user;
+    }
+
+    private void createUser() throws Exception{
+        User user = getNewUser();
+        userController.saveUser(user);
+    }
+
+
+    private User getNewUser() throws Exception{
         String firstName = prompt("Имя: ");
+        new NameAndSurnameValidator(firstName).validate();
         String lastName = prompt("Фамилия: ");
+        new NameAndSurnameValidator(lastName).validate();
         String phone = prompt("Номер телефона: ");
-        userController.saveUser(new User(firstName, lastName, phone));
+        User user = new User(firstName, lastName, phone);
+        return user;
     }
 
     private String prompt(String message) {

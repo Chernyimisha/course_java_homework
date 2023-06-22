@@ -16,6 +16,14 @@ public class UserController {
         repository.CreateUser(user);
     }
 
+    public User updateUser (User user){
+        return repository.updatetUser(user);
+    }
+
+    public void deleteUser(User user){
+        repository.deleteUser(user);
+    }
+
     public User readUser(String userId) throws Exception {
         List<User> users = repository.getAllUsers();
         for (User user : users) {
